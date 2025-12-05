@@ -1,0 +1,18 @@
+.map-picker {
+  margin-top: 0.5rem;
+}
+
+.map-picker p {
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.selected-location {
+  margin-top: 0.5rem;
+  padding: 0.5rem;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  color: #333;
+}
