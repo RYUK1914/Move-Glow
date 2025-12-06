@@ -120,44 +120,93 @@ const Cart = () => {
         <p>Your cart is empty.</p>
       ) : (
         <div className="cart-items-container">
-          <table className="cart-table">
-            <thead>
-              <tr>
-                <th>Product</th>
-                <th>Quantity</th>
-                <th>Unit Price</th>
-                <th>Subtotal</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {cartItems.map(({ product, quantity }) => {
-                const subtotal = parsePrice(product.price) * quantity;
-                return (
-                  <tr key={product.id}>
-                    <td>{product.name}</td>
-                    <td>{quantity}</td>
-                    <td>{product.price} TND</td>
-                    <td>{formatPrice(subtotal)} TND</td>
-                    <td>
-                      <button onClick={() => handleRemove(product.id)}>Remove</button>
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-            <tfoot>
-              <tr>
-                <td colSpan="3">
-                  <strong>Total</strong>
-                </td>
-                <td>
-                  <strong>{formatPrice(totalPrice)} TND</strong>
-                </td>
-                <td></td>
-              </tr>
-            </tfoot>
-          </table>
+          
+          {/* MOBILE VIEW - Card Layout */}
+          <div className="mobile-cart-view">
+            {cartItems.map(({ product, quantity }) => {
+              const subtotal = parsePrice(product.price) * quantity;
+              return (
+                <div key={product.id} className="mobile-cart-item">
+                  <div className="mobile-cart-item-row">
+                    <span className="mobile-cart-label">Product:</span>
+                    <span className="mobile-cart-value">{product.name}</span>
+                  </div>
+                  <div className="mobile-cart-item-row">
+                    <span className="mobile-cart-label">Quantity:</span>
+                    <span className="mobile-cart-value">{quantity}</span>
+                  </div>
+                  <div className="mobile-cart-item-row">
+                    <span className="mobile-cart-label">Price:</span>
+                    <span className="mobile-cart-value">{product.price} TND</span>
+                  </div>
+                  <div className="mobile-cart-item-row">
+                    <span className="mobile-cart-label">Subtotal:</span>
+                    <span className="mobile-cart-value">{formatPrice(subtotal)} TND</span>
+                  </div>
+                  <div className="mobile-cart-item-row">
+                    <span className="mobile-cart-label">Actions:</span>
+                    <span className="mobile-cart-value">
+                      <button 
+                        onClick={() => handleRemove(product.id)}
+                        className="remove-btn-mobile"
+                      >
+                        Remove
+                      </button>
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
+            
+            {cartItems.length > 0 && (
+              <div className="mobile-total">
+                Total: {formatPrice(totalPrice)} TND
+              </div>
+            )}
+          </div>
+
+          {/* DESKTOP VIEW - Table Layout */}
+          <div className="desktop-cart-view">
+            <table className="cart-table">
+              <thead>
+                <tr>
+                  <th>Product</th>
+                  <th>Quantity</th>
+                  <th>Unit Price</th>
+                  <th>Subtotal</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {cartItems.map(({ product, quantity }) => {
+                  const subtotal = parsePrice(product.price) * quantity;
+                  return (
+                    <tr key={product.id}>
+                      <td>{product.name}</td>
+                      <td>{quantity}</td>
+                      <td>{product.price} TND</td>
+                      <td>{formatPrice(subtotal)} TND</td>
+                      <td>
+                        <button onClick={() => handleRemove(product.id)}>Remove</button>
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colSpan="3">
+                    <strong>Total</strong>
+                  </td>
+                  <td>
+                    <strong>{formatPrice(totalPrice)} TND</strong>
+                  </td>
+                  <td></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+
           <div className="payment-options">
             <h3>Payment Options</h3>
             <button onClick={handlePayWithCard}>Pay with Card</button>
