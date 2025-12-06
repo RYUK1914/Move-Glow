@@ -116,7 +116,7 @@ const Products = () => {
                     </div>
                   </div>
                   
-                  {/* Bottom 1/3 - Product Info - CORRECT ORDER */}
+                  {/* Bottom 1/3 - Product Info - COMPACT LAYOUT */}
                   <div className="front-bottom">
                     <div className="product-info-final">
                       <h3 className="product-name-final">{product.name}</h3>
@@ -125,35 +125,38 @@ const Products = () => {
                         <span className="product-price-final">{product.price}</span>
                       </div>
                       
-                      <div className="quantity-final">
-                        <div className="quantity-control-final">
-                          <button 
-                            className="quantity-btn-final minus"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleQuantityChange(productId, Math.max(1, quantities[productId] - 1));
-                            }}
-                          >-</button>
-                          <span className="quantity-value-final">{quantities[productId]}</span>
-                          <button 
-                            className="quantity-btn-final plus"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              handleQuantityChange(productId, quantities[productId] + 1);
-                            }}
-                          >+</button>
+                      {/* COMPACT: Combined quantity and button container */}
+                      <div className="quantity-button-compact">
+                        <div className="quantity-compact">
+                          <div className="quantity-control-compact">
+                            <button 
+                              className="quantity-btn-compact minus"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleQuantityChange(productId, Math.max(1, quantities[productId] - 1));
+                              }}
+                            >-</button>
+                            <span className="quantity-value-compact">{quantities[productId]}</span>
+                            <button 
+                              className="quantity-btn-compact plus"
+                              onClick={(e) => {
+                                e.stopPropagation();
+                                handleQuantityChange(productId, quantities[productId] + 1);
+                              }}
+                            >+</button>
+                          </div>
                         </div>
+                        
+                        <button 
+                          className="buy-btn-compact"
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleBuy(product);
+                          }}
+                        >
+                          Add to Cart
+                        </button>
                       </div>
-                      
-                      <button 
-                        className="buy-btn-final"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleBuy(product);
-                        }}
-                      >
-                        Add to Cart
-                      </button>
                       
                       {/* Empty space below button */}
                       <div className="button-space"></div>
