@@ -1,15 +1,59 @@
+/* src/index.css - FIXED FOR MOBILE */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
   background: linear-gradient(135deg, #F7E04C 0%, #F5C94A 15%, #F18A23 35%, #D66A1D 55%, #D04A1A 70%, #28D7B7 100%);
-  zoom: 80%;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+/* Mobile-specific fixes */
+@media (max-width: 768px) {
+  body {
+    background: linear-gradient(135deg, #F7E04C 0%, #F5C94A 15%, #F18A23 35%, #D66A1D 55%, #D04A1A 70%, #28D7B7 100%);
+    background-attachment: fixed;
+    background-size: cover;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+  
+  html, body {
+    height: 100%;
+    overflow-x: hidden;
+  }
 }
