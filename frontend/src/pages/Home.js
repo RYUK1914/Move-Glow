@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
 import bottles from '../assets/videos/bottles.mp4';
 import post1 from '../assets/videos/post1.mp4';
@@ -13,6 +13,39 @@ const Home = () => {
 
   // Combine arrays for the train animation
   const allTrainImages = [...originalImages];
+
+  // Refs for video elements
+  const heroVideoRef = useRef(null);
+  const post1VideoRef = useRef(null);
+  const locationsVideoRef = useRef(null);
+
+  // State to track which videos are playing
+  const [playingVideos, setPlayingVideos] = useState({
+    hero: false,
+    post1: false,
+    locations: false
+  });
+
+  // Function to handle video play on click
+  const handleVideoPlay = (videoId) => {
+    const videos = {
+      hero: heroVideoRef.current,
+      post1: post1VideoRef.current,
+      locations: locationsVideoRef.current
+    };
+
+    const video = videos[videoId];
+    
+    if (video) {
+      if (video.paused) {
+        video.play().then(() => {
+          setPlayingVideos(prev => ({ ...prev, [videoId]: true }));
+        }).catch(error => {
+          console.error('Error playing video:', error);
+        });
+      }
+    }
+  };
 
   // Scroll animation effect
   useEffect(() => {
@@ -40,9 +73,31 @@ const Home = () => {
   return (
     <div className="home">
       <div className="hero">
-        <video src={bottles} autoPlay muted loop></video>
+        <div 
+          className={`video-container ${playingVideos.hero ? 'playing' : 'paused'}`}
+          onClick={() => handleVideoPlay('hero')}
+        >
+          <video 
+            ref={heroVideoRef}
+            src={bottles} 
+            muted 
+            loop
+            playsInline
+          ></video>
+          {!playingVideos.hero && (
+            <div className="video-play-overlay">
+              <div className="play-button">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <circle cx="40" cy="40" r="38" stroke="white" strokeWidth="4"/>
+                  <path d="M32 24L56 40L32 56V24Z" fill="white"/>
+                </svg>
+                <span className="play-text">Click to play video</span>
+              </div>
+            </div>
+          )}
+        </div>
         <div className="hero-content">
-          <h1>Welcome to Move&Glow</h1>
+          <h1>Welcome to Move & Glow</h1>
           <p>Discover the power of natural juices for a healthier, more vibrant you.</p>
         </div>
       </div>
@@ -53,7 +108,28 @@ const Home = () => {
           <p>Our juices are made from the finest organic ingredients, packed with vitamins and antioxidants to boost your health and energy levels.</p>
         </div>
         <div className="section-media">
-          <video src={post1} autoPlay muted loop></video>
+          <div 
+            className={`video-container ${playingVideos.post1 ? 'playing' : 'paused'}`}
+            onClick={() => handleVideoPlay('post1')}
+          >
+            <video 
+              ref={post1VideoRef}
+              src={post1} 
+              muted 
+              loop
+              playsInline
+            ></video>
+            {!playingVideos.post1 && (
+              <div className="video-play-overlay">
+                <div className="play-button">
+                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="2"/>
+                    <path d="M24 18L42 30L24 42V18Z" fill="white"/>
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -140,7 +216,28 @@ const Home = () => {
           <p>MONOPRIX ain zaghouin - Zéphyr - Carthage - El menzah-Marsa Aouina - Zayetine - Ennasr - Jardin de carthage</p>
         </div>
         <div className="section-media">
-          <video src={post1} autoPlay muted loop></video>
+          <div 
+            className={`video-container ${playingVideos.locations ? 'playing' : 'paused'}`}
+            onClick={() => handleVideoPlay('locations')}
+          >
+            <video 
+              ref={locationsVideoRef}
+              src={post1} 
+              muted 
+              loop
+              playsInline
+            ></video>
+            {!playingVideos.locations && (
+              <div className="video-play-overlay">
+                <div className="play-button">
+                  <svg width="60" height="60" viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="30" cy="30" r="28" stroke="white" strokeWidth="2"/>
+                    <path d="M24 18L42 30L24 42V18Z" fill="white"/>
+                  </svg>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 

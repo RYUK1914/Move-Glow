@@ -77,10 +77,10 @@ const Products = () => {
       'booster',
       'beauty glow',
       'fresh glow',
+      'pure green',
       'vital glow',
       'water glow',
-      'zesty power',
-      'pure green'
+       'zesty power' //'pure green'
     ];
     return {
       ...product,

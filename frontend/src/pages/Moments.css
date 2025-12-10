@@ -7,7 +7,7 @@
 
 .moments-header {
   text-align: center;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
   padding: 2rem 1rem;
 }
 
@@ -25,8 +25,48 @@
   font-size: 1.3rem;
   color: #6c757d;
   max-width: 700px;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   line-height: 1.6;
+}
+
+/* Header Images Row - img50 to img55 */
+.header-images-row {
+  margin: 2rem auto 3rem;
+  max-width: 1200px;
+  padding: 0 1rem;
+}
+
+.header-images-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  justify-content: center;
+}
+
+.header-image-item {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  aspect-ratio: 1/1;
+  cursor: pointer;
+}
+
+.header-image-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+}
+
+.header-image-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.header-image-item:hover img {
+  transform: scale(1.05);
 }
 
 /* Moments Gallery Grid */
@@ -88,15 +128,17 @@
   letter-spacing: 1px;
 }
 
-/* Image Train Animation (Same as Home page) */
+/* Image Train Animation - SLOWER SPEED with centered images */
 .image-train {
   position: relative;
   width: 100%;
-  height: 250px;
+  height: 300px;
   overflow: hidden;
   margin: 4rem 0;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   border-radius: 10px;
+  display: flex;
+  align-items: center;
 }
 
 .image-train::before {
@@ -118,33 +160,45 @@
   display: flex;
   width: max-content;
   height: 100%;
-  animation: scrollTrain 40s linear infinite;
+  align-items: center;
+  animation: scrollTrain 120s linear infinite;
 }
 
 .image-train-second .image-train-inner {
-  animation: scrollTrain 40s linear infinite reverse;
-  animation-delay: -20s;
+  animation: scrollTrain 120s linear infinite reverse;
+  animation-delay: -60s;
 }
 
 .train-image-container {
-  width: 200px;
-  height: 200px;
-  margin: 25px 15px;
+  width: 250px;
+  height: 250px;
+  margin: 0 20px;
   flex-shrink: 0;
-  border-radius: 10px;
+  border-radius: 15px;
   overflow: hidden;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.1);
 }
 
 .train-image-container:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.5);
 }
 
 .train-image-container img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center;
+  transition: transform 0.5s ease;
+}
+
+.train-image-container:hover img {
+  transform: scale(1.05);
 }
 
 @keyframes scrollTrain {
@@ -185,6 +239,10 @@
   .moments-gallery {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
+  
+  .header-images-container {
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  }
 }
 
 @media (max-width: 992px) {
@@ -197,10 +255,24 @@
     gap: 1rem;
   }
   
+  .header-images-container {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+  }
+  
   .train-image-container {
-    width: 180px;
-    height: 180px;
-    margin: 35px 10px;
+    width: 200px;
+    height: 200px;
+    margin: 0 15px;
+  }
+  
+  .image-train-inner {
+    animation-duration: 180s;
+  }
+  
+  .image-train-second .image-train-inner {
+    animation-duration: 180s;
+    animation-delay: -90s;
   }
 }
 
@@ -217,20 +289,34 @@
     font-size: 1.1rem;
   }
   
+  .header-images-container {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+  }
+  
   .moments-gallery {
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 0.8rem;
   }
   
   .image-train {
-    height: 200px;
+    height: 250px;
     margin: 3rem 0;
   }
   
   .train-image-container {
-    width: 150px;
-    height: 150px;
-    margin: 25px 8px;
+    width: 180px;
+    height: 180px;
+    margin: 0 12px;
+  }
+  
+  .image-train-inner {
+    animation-duration: 240s;
+  }
+  
+  .image-train-second .image-train-inner {
+    animation-duration: 240s;
+    animation-delay: -120s;
   }
   
   .moments-footer {
@@ -249,6 +335,11 @@
     letter-spacing: 1px;
   }
   
+  .header-images-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+  }
+  
   .moments-gallery {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 0.6rem;
@@ -259,13 +350,14 @@
   }
   
   .image-train {
-    height: 150px;
+    height: 200px;
   }
   
   .train-image-container {
-    width: 120px;
-    height: 120px;
-    margin: 15px 6px;
+    width: 140px;
+    height: 140px;
+    margin: 0 10px;
+    border-radius: 10px;
   }
   
   @keyframes scrollTrain {
@@ -290,7 +382,9 @@
   }
 }
 
-.moment-item img, .train-image-container img {
+.moment-item img, 
+.train-image-container img,
+.header-image-item img {
   animation: fadeIn 0.5s ease-out;
 }
 
