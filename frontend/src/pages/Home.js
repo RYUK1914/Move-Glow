@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import './Home.css';
 import bottles from '../assets/videos/bottles.mp4';
 import post1 from '../assets/videos/post1.mp4';
-import post6 from '../assets/videos/post6.jpg';
-import post7 from '../assets/videos/post7.jpg';
 
 const Home = () => {
   // Generate array for original images
@@ -32,7 +30,7 @@ const Home = () => {
     }, observerOptions);
 
     // Observe all paragraphs and headings
-    document.querySelectorAll('.section-content, .section-content-alt, .paragraph-with-image, .content-with-image, .image-after, .balanced-section, .locations-section').forEach(el => {
+    document.querySelectorAll('.section-content, .section-content-alt, .paragraph-with-image, .content-with-image, .balanced-section, .locations-section').forEach(el => {
       observer.observe(el);
     });
 
@@ -59,11 +57,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Image before the paragraphs section - Now with side image */}
-      <div className="section content-with-image">
-        <div className="section-media side-image">
-          <img src="/assets/images/mov1.png" alt="Fresh Fruits" />
-        </div>
+      {/* 100% Natural section - No image */}
+      <div className="section">
         <div className="section-content">
           <h2>100% Natural & Sugar-Free</h2>
           <p>Our juice products are crafted with 100% natural ingredients, containing absolutely no added sugars. Pure taste, pure health.</p>
@@ -71,67 +66,41 @@ const Home = () => {
         </div>
       </div>
 
-      {/* First paragraph section with image grid */}
+      {/* Fruit Benefits section - No images */}
       <div className="section">
-        <div className="section-content-alt">
+        <div className="section-content">
           <h2>Powerful Fruit Benefits</h2>
           <p>Ananas boosts digestion and reduces inflammation. Kiwi provides vitamin C for immunity and recovery.</p>
           <p>Pomme supports hydration and energy. Citron detoxifies and alkalizes the body. Menths soothes digestion and refreshes.</p>
-          <div className="paragraph-with-image">
-            <div className="image-grid-small">
-              <img src="/assets/images/cat7.png" alt="Fresh Ingredients" />
-              <img src="/assets/images/cat8.png" alt="Natural Energy" />
-            </div>
-          </div>
         </div>
-        <div className="section-content">
+        <div className="section-content-alt">
           <h2>Natural Energy for Athletes</h2>
           <p>Our sugar-free juices provide sustained energy for workouts and recovery. No artificial ingredients, just pure fruit power.</p>
           <p>Perfect before, during, and after exercise. Supports muscle function and reduces fatigue naturally.</p>
-          <div className="paragraph-with-image">
-            <div className="image-grid-small">
-              <img src="/assets/images/cat1.png" alt="Healthy Lifestyle" />
-              <img src="/assets/images/mov1.png" alt="Active Living" />
-            </div>
-          </div>
         </div>
       </div>
 
-      {/* Body & Performance with side image */}
-      <div className="section content-with-image">
+      {/* Body & Performance - No image */}
+      <div className="section">
         <div className="section-content">
           <h2>Body & Performance</h2>
           <p>Ananas aids muscle recovery. Kiwi enhances endurance. Pomme maintains energy levels.</p>
           <p>Citron boosts metabolism and hydration. Menths improves breathing and digestion. Feel the difference in your performance.</p>
         </div>
-        <div className="section-media side-image">
-          <img src="/assets/images/mov1.png" alt="Performance Boost" />
-        </div>
       </div>
 
-      {/* Image grid section */}
-      <div className="image-grid-section">
-        <h2>Our Natural Ingredients</h2>
-        <div className="image-after">
-          <img src="/assets/images/cat1.png" alt="Quality Ingredients" />
-          <img src="/assets/images/cat7.png" alt="Fresh Juice" />
-          <img src="/assets/images/cat8.png" alt="Healthy Lifestyle" />
-          <img src="/assets/images/mov1.png" alt="Active Living" />
-        </div>
-      </div>
-
-      {/* Boost Your Immunity - Now with side image */}
+      {/* Boost Your Immunity - with unique image */}
       <div className="section balanced-section">
         <div className="balanced-content">
           <h2>Boost Your Immunity</h2>
           <p>Rich in vitamin C and other immune-boosting nutrients, our juices help keep you healthy and strong.</p>
         </div>
         <div className="balanced-media">
-          <img src="/assets/images/mov1.png" alt="Immune Boost" />
+          <img src="/assets/images/cat1.png" alt="Immune Boost" />
         </div>
       </div>
 
-      {/* Natural Energy - Now with side image */}
+      {/* Natural Energy - with unique image */}
       <div className="section balanced-section">
         <div className="balanced-media">
           <img src="/assets/images/cat7.png" alt="Natural Energy" />
@@ -142,19 +111,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Two images on left, two on right - First set with new images */}
-      <div className="section two-images">
-        <div className="section-content">
-          <h2>Vibrant Colors</h2>
-          <p>Our juices capture the vibrant colors and flavors of fresh fruits and vegetables in every bottle.</p>
-        </div>
-        <div className="section-media">
-          <img src={post6} alt="Vibrant Colors 1" />
-          <img src={post7} alt="Vibrant Colors 2" />
-        </div>
-      </div>
-
-      {/* Premium Quality - Now with side image */}
+      {/* Premium Quality - with unique image */}
       <div className="section balanced-section">
         <div className="balanced-content">
           <h2>Premium Quality</h2>
@@ -165,10 +122,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Fresh Delivery - Now with side image */}
+      {/* Fresh Delivery - with unique image */}
       <div className="section balanced-section">
         <div className="balanced-media">
-          <img src="/assets/images/cat1.png" alt="Fresh Delivery" />
+          <img src="/assets/images/mov1.png" alt="Fresh Delivery" />
         </div>
         <div className="balanced-content">
           <h2>Fresh Delivery</h2>
