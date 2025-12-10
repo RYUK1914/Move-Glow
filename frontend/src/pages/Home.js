@@ -1,11 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Home.css';
 import bottles from '../assets/videos/bottles.mp4';
 import post1 from '../assets/videos/post1.mp4';
-import post2 from '../assets/videos/post2.mp4';
-import post3 from '../assets/videos/post3.mp4';
-import post4 from '../assets/videos/post4.jpg';
-import post5 from '../assets/videos/post5.jpg';
 import post6 from '../assets/videos/post6.jpg';
 import post7 from '../assets/videos/post7.jpg';
 
@@ -19,6 +15,29 @@ const Home = () => {
 
   // Combine arrays for the train animation
   const allTrainImages = [...originalImages];
+
+  // Scroll animation effect
+  useEffect(() => {
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate-in');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all paragraphs and headings
+    document.querySelectorAll('.section-content, .section-content-alt, .paragraph-with-image, .content-with-image, .image-after, .balanced-section, .locations-section').forEach(el => {
+      observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <div className="home">
@@ -40,51 +59,90 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="section">
-        <div className="section-media">
-          <video src={post2} autoPlay muted loop></video>
+      {/* Image before the paragraphs section - Now with side image */}
+      <div className="section content-with-image">
+        <div className="section-media side-image">
+          <img src="/assets/images/mov1.png" alt="Fresh Fruits" />
         </div>
         <div className="section-content">
-          <h2>Fresh & Natural</h2>
-          <p>We source our fruits and vegetables directly from local farms to ensure maximum freshness and nutritional value.</p>
+          <h2>100% Natural & Sugar-Free</h2>
+          <p>Our juice products are crafted with 100% natural ingredients, containing absolutely no added sugars. Pure taste, pure health.</p>
+          <p>Perfect for sporty people who need clean energy without sugar crashes. Stay energized and perform at your peak.</p>
         </div>
       </div>
 
-      {/* New video section - post3 */}
+      {/* First paragraph section with image grid */}
       <div className="section">
-        <div className="section-content">
-          <h2>Organic Goodness</h2>
-          <p>Experience the pure taste of nature with our 100% organic juice blends, free from additives and preservatives.</p>
+        <div className="section-content-alt">
+          <h2>Powerful Fruit Benefits</h2>
+          <p>Ananas boosts digestion and reduces inflammation. Kiwi provides vitamin C for immunity and recovery.</p>
+          <p>Pomme supports hydration and energy. Citron detoxifies and alkalizes the body. Menths soothes digestion and refreshes.</p>
+          <div className="paragraph-with-image">
+            <div className="image-grid-small">
+              <img src="/assets/images/cat7.png" alt="Fresh Ingredients" />
+              <img src="/assets/images/cat8.png" alt="Natural Energy" />
+            </div>
+          </div>
         </div>
-        <div className="section-media">
-          <video src={post3} autoPlay muted loop></video>
+        <div className="section-content">
+          <h2>Natural Energy for Athletes</h2>
+          <p>Our sugar-free juices provide sustained energy for workouts and recovery. No artificial ingredients, just pure fruit power.</p>
+          <p>Perfect before, during, and after exercise. Supports muscle function and reduces fatigue naturally.</p>
+          <div className="paragraph-with-image">
+            <div className="image-grid-small">
+              <img src="/assets/images/cat1.png" alt="Healthy Lifestyle" />
+              <img src="/assets/images/mov1.png" alt="Active Living" />
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Two images on left, two on right - First set with new images */}
-      <div className="section two-images">
+      {/* Body & Performance with side image */}
+      <div className="section content-with-image">
         <div className="section-content">
+          <h2>Body & Performance</h2>
+          <p>Ananas aids muscle recovery. Kiwi enhances endurance. Pomme maintains energy levels.</p>
+          <p>Citron boosts metabolism and hydration. Menths improves breathing and digestion. Feel the difference in your performance.</p>
+        </div>
+        <div className="section-media side-image">
+          <img src="/assets/images/mov1.png" alt="Performance Boost" />
+        </div>
+      </div>
+
+      {/* Image grid section */}
+      <div className="image-grid-section">
+        <h2>Our Natural Ingredients</h2>
+        <div className="image-after">
+          <img src="/assets/images/cat1.png" alt="Quality Ingredients" />
+          <img src="/assets/images/cat7.png" alt="Fresh Juice" />
+          <img src="/assets/images/cat8.png" alt="Healthy Lifestyle" />
+          <img src="/assets/images/mov1.png" alt="Active Living" />
+        </div>
+      </div>
+
+      {/* Boost Your Immunity - Now with side image */}
+      <div className="section balanced-section">
+        <div className="balanced-content">
           <h2>Boost Your Immunity</h2>
           <p>Rich in vitamin C and other immune-boosting nutrients, our juices help keep you healthy and strong.</p>
         </div>
-        <div className="section-media">
-          <img src={post4} alt="Immunity Boost 1" />
-          <img src="/assets/images/im4.png" alt="Immunity Boost 2" />
+        <div className="balanced-media">
+          <img src="/assets/images/mov1.png" alt="Immune Boost" />
         </div>
       </div>
 
-      <div className="section two-images">
-        <div className="section-media">
-          <img src={post5} alt="Energy Boost 1" />
-          <img src="/assets/images/mov2.png" alt="Energy Boost 2" />
+      {/* Natural Energy - Now with side image */}
+      <div className="section balanced-section">
+        <div className="balanced-media">
+          <img src="/assets/images/cat7.png" alt="Natural Energy" />
         </div>
-        <div className="section-content">
+        <div className="balanced-content">
           <h2>Natural Energy</h2>
           <p>Get a natural energy boost without the crash from our carefully crafted juice blends.</p>
         </div>
       </div>
 
-      {/* New two-image section with post6 and post7 */}
+      {/* Two images on left, two on right - First set with new images */}
       <div className="section two-images">
         <div className="section-content">
           <h2>Vibrant Colors</h2>
@@ -96,33 +154,36 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Two images on left, two on right - Second set */}
-      <div className="section two-images">
-        <div className="section-media">
-          <img src="/assets/images/cat1.png" alt="Premium Quality 1" />
-          <img src="/assets/images/cat2.png" alt="Premium Quality 2" />
-        </div>
-        <div className="section-content">
+      {/* Premium Quality - Now with side image */}
+      <div className="section balanced-section">
+        <div className="balanced-content">
           <h2>Premium Quality</h2>
           <p>Experience the difference with our premium selection of organic fruits and vegetables.</p>
         </div>
+        <div className="balanced-media">
+          <img src="/assets/images/cat8.png" alt="Premium Quality" />
+        </div>
       </div>
 
-      <div className="section two-images">
-        <div className="section-content">
+      {/* Fresh Delivery - Now with side image */}
+      <div className="section balanced-section">
+        <div className="balanced-media">
+          <img src="/assets/images/cat1.png" alt="Fresh Delivery" />
+        </div>
+        <div className="balanced-content">
           <h2>Fresh Delivery</h2>
           <p>We deliver freshness to your doorstep with our carefully packaged juice bottles.</p>
         </div>
-        <div className="section-media">
-          <img src="/assets/images/cat7.png" alt="Fresh Delivery 1" />
-          <img src="/assets/images/cat8.png" alt="Fresh Delivery 2" />
-        </div>
       </div>
 
-      <div className="section">
+      {/* Product Locations with video */}
+      <div className="section locations-section">
         <div className="section-content">
           <h2>You can find our product in :</h2>
           <p>MONOPRIX ain zaghouin - Zéphyr - Carthage - El menzah-Marsa Aouina - Zayetine - Ennasr - Jardin de carthage</p>
+        </div>
+        <div className="section-media">
+          <video src={post1} autoPlay muted loop></video>
         </div>
       </div>
 

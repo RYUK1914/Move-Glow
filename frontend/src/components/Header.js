@@ -15,7 +15,7 @@ const Header = () => {
   return (
     <header className="header">
       <div className="logo">
-        <h1>Move&Glow</h1>
+        <h1>Move & Glow</h1>
       </div>
       
       {/* Hamburger button - ALWAYS VISIBLE ON MOBILE */}

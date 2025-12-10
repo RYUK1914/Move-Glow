@@ -19,7 +19,7 @@ const Contact = () => {
         </div>
         <div className="contact-item">
           <img src={phone} alt="Phone" />
-          <span>+216 23 222 447</span>
+          <span>+216 52 232 666</span>
         </div>
       </section>
     </div>
