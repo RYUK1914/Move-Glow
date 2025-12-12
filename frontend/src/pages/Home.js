@@ -176,10 +176,10 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Natural Energy - with unique image */}
+      {/* Natural Energy - with updated image img17.jpg */}
       <div className="section balanced-section">
         <div className="balanced-media">
-          <img src="/assets/images/cat7.png" alt="Natural Energy" />
+          <img src="/assets/images/img17.jpg" alt="Natural Energy" />
         </div>
         <div className="balanced-content">
           <h2>Natural Energy</h2>
@@ -187,21 +187,21 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Premium Quality - with unique image */}
+      {/* Premium Quality - with updated image img9.jpg */}
       <div className="section balanced-section">
         <div className="balanced-content">
           <h2>Premium Quality</h2>
           <p>Experience the difference with our premium selection of organic fruits and vegetables.</p>
         </div>
         <div className="balanced-media">
-          <img src="/assets/images/cat8.png" alt="Premium Quality" />
+          <img src="/assets/images/img9.jpg" alt="Premium Quality" />
         </div>
       </div>
 
-      {/* Fresh Delivery - with unique image */}
+      {/* Fresh Delivery - with updated image img24.jpg */}
       <div className="section balanced-section">
         <div className="balanced-media">
-          <img src="/assets/images/mov1.png" alt="Fresh Delivery" />
+          <img src="/assets/images/img24.jpg" alt="Fresh Delivery" />
         </div>
         <div className="balanced-content">
           <h2>Fresh Delivery</h2>
