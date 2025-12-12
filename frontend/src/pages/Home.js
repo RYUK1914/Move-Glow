@@ -3,6 +3,7 @@ import './Home.css';
 import bottles from '../assets/videos/bottles.mp4';
 import post1 from '../assets/videos/post1.mp4';
 
+
 const Home = () => {
   // Generate array for original images
   const originalImages = [

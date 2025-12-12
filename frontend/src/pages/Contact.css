@@ -81,11 +81,11 @@
     opacity: 0;
   }
   50% {
-    transform: translateX(-400px) scale(1.2);
+    transform: translateX(-50vw) scale(1.2); /* Use vw for responsive */
     opacity: 1;
   }
   100% {
-    transform: translateX(-600px) scale(0.8);
+    transform: translateX(-100vw) scale(0.8);
     opacity: 0;
   }
 }
@@ -96,11 +96,11 @@
     opacity: 0;
   }
   50% {
-    transform: translateX(400px) scale(1.2);
+    transform: translateX(50vw) scale(1.2); /* Use vw for responsive */
     opacity: 1;
   }
   100% {
-    transform: translateX(600px) scale(0.8);
+    transform: translateX(100vw) scale(0.8);
     opacity: 0;
   }
 }
@@ -220,25 +220,36 @@
   transform: scale(1.05);
 }
 
-/* Responsive Design */
+/* Responsive Design - FIXED FOR MOBILE */
 @media (max-width: 768px) {
+  /* Make images smaller for mobile */
   .curtain-image {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-width: 4px;
   }
   
+  /* Adjust starting positions for mobile */
+  .curtain-right-to-left {
+    right: -200px; /* Reduced from -400px */
+  }
+  
+  .curtain-left-to-right {
+    left: -200px; /* Reduced from -400px */
+  }
+  
+  /* Mobile-specific animation with vw units */
   @keyframes slideFromRight {
     0% {
       transform: translateX(0) scale(1);
       opacity: 0;
     }
     50% {
-      transform: translateX(-200px) scale(1.2);
+      transform: translateX(-40vw) scale(1.2); /* Responsive */
       opacity: 1;
     }
     100% {
-      transform: translateX(-300px) scale(0.8);
+      transform: translateX(-80vw) scale(0.8); /* Responsive */
       opacity: 0;
     }
   }
@@ -249,27 +260,46 @@
       opacity: 0;
     }
     50% {
-      transform: translateX(200px) scale(1.2);
+      transform: translateX(40vw) scale(1.2); /* Responsive */
       opacity: 1;
     }
     100% {
-      transform: translateX(300px) scale(0.8);
+      transform: translateX(80vw) scale(0.8); /* Responsive */
       opacity: 0;
     }
   }
   
+  /* Adjust positions for smaller screens */
+  .curtain-image-1,
+  .curtain-image-2 {
+    top: 25%; /* Adjusted for mobile */
+  }
+  
+  .curtain-image-3,
+  .curtain-image-4 {
+    bottom: 25%; /* Adjusted for mobile */
+  }
+  
+  /* Ensure animation runs on mobile */
+  .curtain-animation {
+    -webkit-animation: none; /* Remove any conflicting webkit properties */
+  }
+  
+  /* Contact box adjustments */
   .contact-box {
-    padding: 30px 20px;
+    padding: 30px 15px;
+    margin: 20px;
+    max-width: 95%;
   }
   
   .contact-box h2 {
-    font-size: 2.2rem;
+    font-size: 2rem;
     margin-bottom: 30px;
   }
   
   .contact-item {
     padding: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   
   .contact-item img {
@@ -279,6 +309,98 @@
   }
   
   .contact-item a, .contact-item span {
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
+  
+  .skip-animation-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    bottom: 15px;
+    right: 15px;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+  .curtain-image {
+    width: 100px;
+    height: 100px;
+    border-width: 3px;
+  }
+  
+  .curtain-right-to-left {
+    right: -150px;
+  }
+  
+  .curtain-left-to-right {
+    left: -150px;
+  }
+  
+  @keyframes slideFromRight {
+    0% {
+      transform: translateX(0) scale(1);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(-35vw) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-70vw) scale(0.8);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes slideFromLeft {
+    0% {
+      transform: translateX(0) scale(1);
+      opacity: 0;
+    }
+    50% {
+      transform: translateX(35vw) scale(1.2);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(70vw) scale(0.8);
+      opacity: 0;
+    }
+  }
+  
+  .curtain-image-1,
+  .curtain-image-2 {
+    top: 30%;
+  }
+  
+  .curtain-image-3,
+  .curtain-image-4 {
+    bottom: 30%;
+  }
+}
+
+/* Add touch device support */
+@media (hover: none) and (pointer: coarse) {
+  .contact-item:hover {
+    transform: none; /* Remove hover effects on touch devices */
+  }
+  
+  .skip-animation-btn:hover {
+    transform: none;
+  }
+}
+
+/* Force GPU acceleration for smoother animations */
+.curtain-image {
+  -webkit-transform: translateZ(0);
+  -moz-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  -o-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -moz-perspective: 1000;
+  -ms-perspective: 1000;
+  perspective: 1000;
 }
