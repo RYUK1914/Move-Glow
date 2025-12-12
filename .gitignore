@@ -5,3 +5,4 @@ frontend/build/
 .env.local
 .DS_Store
 *.zip 
+node_modules/ 
