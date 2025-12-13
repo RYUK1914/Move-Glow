@@ -1,18 +1,54 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import products from '../data/products';
 import { CartContext } from '../context/CartContext';
 import './Products.css';
 
 const Products = () => {
   const { addItem } = useContext(CartContext);
-  const [quantities, setQuantities] = useState(
-    products.reduce((acc, product) => {
-      acc[product.id] = 1;
-      return acc;
-    }, {})
-  );
-  
+  const [quantities, setQuantities] = useState({});
   const [flippedCards, setFlippedCards] = useState({});
+  const [productList, setProductList] = useState([]);
+
+  // Load products from localStorage or use default
+  useEffect(() => {
+    const savedProducts = localStorage.getItem('moveglow_products');
+    if (savedProducts) {
+      const parsedProducts = JSON.parse(savedProducts);
+      setProductList(parsedProducts);
+      
+      // Initialize quantities
+      const initialQuantities = {};
+      parsedProducts.forEach(product => {
+        initialQuantities[product.id] = 1;
+      });
+      setQuantities(initialQuantities);
+    } else {
+      // Use default products with updated names
+      const updatedProducts = products.map((product, index) => {
+        const newNames = [
+          'citrus fuel',
+          'booster',
+          'beauty glow',
+          'fresh glow',
+          'pure green',
+          'vital glow',
+          'water glow',
+          'zesty power'
+        ];
+        return {
+          ...product,
+          name: newNames[index] || product.name
+        };
+      });
+      
+      setProductList(updatedProducts);
+      const initialQuantities = {};
+      updatedProducts.forEach(product => {
+        initialQuantities[product.id] = 1;
+      });
+      setQuantities(initialQuantities);
+    }
+  }, []);
 
   const handleQuantityChange = (productId, quantity) => {
     setQuantities(prev => ({
@@ -34,59 +70,83 @@ const Products = () => {
     }));
   };
 
-  // CORRECTED ingredients for each product
-  const productIngredients = {
-    1: 'orange - citron - carotte - gingembre',
-    2: 'betteraves - pomme - carottes - citron - gingembre',
-    3: 'grenade - betterave - menthe',
-    4: 'ananas frais - pomme - concombre - menthe',
-    5: 'pomme - concombre - céleri - gingembre - menthe',
-    6: 'kiwi - pomme - menthe - concombre',
-    7: 'pastèque - citron - menthe',
-    8: 'pommes - citron - gingembre'
-  };
-
-  // Define benefits/effects for each product with line breaks
-  const productBenefits = {
-    1: '• Rich in Vitamin C\n• Boosts immunity\n• Improves digestion\n• Anti-inflammatory',
-    2: '• Boosts energy\n• Improves circulation\n• Detoxifies liver\n• Heart health',
-    3: '• Powerful antioxidants\n• Anti-aging\n• Improves blood flow\n• Refreshing',
-    4: '• Aids digestion\n• Reduces bloating\n• Hydrating\n• Rich in enzymes',
-    5: '• Alkalizes body\n• Natural detox\n• Reduces inflammation\n• Rich in fiber',
-    6: '• High in Vitamin C\n• Hydrates skin\n• Aids digestion\n• Natural cooling',
-    7: '• Excellent hydration\n• Natural diuretic\n• Cooling effect\n• Reduces inflammation',
-    8: '• Boosts metabolism\n• Anti-inflammatory\n• Aids digestion\n• Energy booster'
-  };
-
-  // Define back images for each product from assets/images
-  const backImages = {
-    1: require('../assets/images/cat1.png'),
-    2: require('../assets/images/cat2.png'),
-    3: require('../assets/images/cat3.png'),
-    4: require('../assets/images/cat4.png'),
-    5: require('../assets/images/cat5.png'),
-    6: require('../assets/images/cat6.png'),
-    7: require('../assets/images/cat7.png'),
-    8: require('../assets/images/cat8.png')
-  };
-
-  // Updated product names (all 8 products)
-  const updatedProducts = products.map((product, index) => {
-    const newNames = [
-      'citrus fuel',
-      'booster',
-      'beauty glow',
-      'fresh glow',
-      'pure green',
-      'vital glow',
-      'water glow',
-      'zesty power'
-    ];
-    return {
-      ...product,
-      name: newNames[index] || product.name
+  // Get ingredients for a product
+  const getIngredients = (product) => {
+    if (product.ingredients) return product.ingredients;
+    
+    const defaultIngredients = {
+      1: 'orange - citron - carotte - gingembre',
+      2: 'betteraves - pomme - carottes - citron - gingembre',
+      3: 'grenade - betterave - menthe',
+      4: 'ananas frais - pomme - concombre - menthe',
+      5: 'pomme - concombre - céleri - gingembre - menthe',
+      6: 'kiwi - pomme - menthe - concombre',
+      7: 'pastèque - citron - menthe',
+      8: 'pommes - citron - gingembre'
     };
-  });
+    return defaultIngredients[product.id] || 'Fresh ingredients';
+  };
+
+  // Get benefits for a product
+  const getBenefits = (product) => {
+    if (product.benefits) return product.benefits;
+    
+    const defaultBenefits = {
+      1: '• Rich in Vitamin C\n• Boosts immunity\n• Improves digestion\n• Anti-inflammatory',
+      2: '• Boosts energy\n• Improves circulation\n• Detoxifies liver\n• Heart health',
+      3: '• Powerful antioxidants\n• Anti-aging\n• Improves blood flow\n• Refreshing',
+      4: '• Aids digestion\n• Reduces bloating\n• Hydrating\n• Rich in enzymes',
+      5: '• Alkalizes body\n• Natural detox\n• Reduces inflammation\n• Rich in fiber',
+      6: '• High in Vitamin C\n• Hydrates skin\n• Aids digestion\n• Natural cooling',
+      7: '• Excellent hydration\n• Natural diuretic\n• Cooling effect\n• Reduces inflammation',
+      8: '• Boosts metabolism\n• Anti-inflammatory\n• Aids digestion\n• Energy booster'
+    };
+    return defaultBenefits[product.id] || '• Health benefits\n• Natural ingredients\n• Freshly made';
+  };
+
+  // Get back image
+  const getBackImage = (product) => {
+    if (product.backImage) {
+      // If it's a URL, use it directly
+      if (product.backImage.startsWith('http') || product.backImage.startsWith('/')) {
+        return product.backImage;
+      }
+      // If it's a require statement or local path
+      try {
+        return product.backImage;
+      } catch {
+        // Continue to default
+      }
+    }
+    
+    // Try to load default back image based on ID
+    try {
+      // For IDs 1-8, use the cat images
+      if (product.id >= 1 && product.id <= 8) {
+        const backImages = {
+          1: require('../assets/images/cat1.png'),
+          2: require('../assets/images/cat2.png'),
+          3: require('../assets/images/cat3.png'),
+          4: require('../assets/images/cat4.png'),
+          5: require('../assets/images/cat5.png'),
+          6: require('../assets/images/cat6.png'),
+          7: require('../assets/images/cat7.png'),
+          8: require('../assets/images/cat8.png')
+        };
+        return backImages[product.id];
+      }
+    } catch (error) {
+      console.log('Error loading back image:', error);
+    }
+    
+    // Fallback to a default image
+    try {
+      return require('../assets/images/default-back.png');
+    } catch {
+      // Ultimate fallback - empty string or placeholder
+      return '';
+    }
+  };
 
   return (
     <div className="products">
@@ -95,7 +155,7 @@ const Products = () => {
         <p className="products-subtitle">Press any card to flip and discover benefits!</p>
       </div>
       <div className="product-list">
-        {updatedProducts.map((product, index) => {
+        {productList.map((product) => {
           const productId = product.id;
           const isFlipped = flippedCards[productId];
           
@@ -168,7 +228,7 @@ const Products = () => {
                 <div className="product-back">
                   {/* Top 1.5/3 - Image */}
                   <div className="back-image">
-                    <img src={backImages[productId]} alt={`${product.name} ingredients`} className="back-img" />
+                    <img src={getBackImage(product)} alt={`${product.name} ingredients`} className="back-img" />
                     <div className="image-overlay">
                       <p className="flip-hint">Click to flip back</p>
                     </div>
@@ -181,13 +241,13 @@ const Products = () => {
                       <div className="ingredients-section">
                         <h4 className="section-title">Ingredients:</h4>
                         <div className="ingredients-text">
-                          {productIngredients[productId]}
+                          {getIngredients(product)}
                         </div>
                       </div>
                       <div className="benefits-section">
                         <h4 className="section-title">Benefits:</h4>
                         <div className="benefits-text">
-                          {productBenefits[productId].split('\n').map((line, index) => (
+                          {getBenefits(product).split('\n').map((line, index) => (
                             <div key={index} className="benefit-line">
                               {line}
                             </div>
