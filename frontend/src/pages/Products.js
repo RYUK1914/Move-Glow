@@ -46,16 +46,16 @@ const Products = () => {
     8: 'pommes - citron - gingembre'
   };
 
-  // Define benefits/effects for each product
+  // Define benefits/effects for each product with line breaks
   const productBenefits = {
-    1: 'Rich in Vitamin C • Boosts immunity • Improves digestion • Anti-inflammatory',
-    2: 'Boosts energy • Improves circulation • Detoxifies liver • Heart health',
-    3: 'Powerful antioxidants • Anti-aging • Improves blood flow • Refreshing',
-    4: 'Aids digestion • Reduces bloating • Hydrating • Rich in enzymes',
-    5: 'Alkalizes body • Natural detox • Reduces inflammation • Rich in fiber',
-    6: 'High in Vitamin C • Hydrates skin • Aids digestion • Natural cooling',
-    7: 'Excellent hydration • Natural diuretic • Cooling effect • Reduces inflammation',
-    8: 'Boosts metabolism • Anti-inflammatory • Aids digestion • Energy booster'
+    1: '• Rich in Vitamin C\n• Boosts immunity\n• Improves digestion\n• Anti-inflammatory',
+    2: '• Boosts energy\n• Improves circulation\n• Detoxifies liver\n• Heart health',
+    3: '• Powerful antioxidants\n• Anti-aging\n• Improves blood flow\n• Refreshing',
+    4: '• Aids digestion\n• Reduces bloating\n• Hydrating\n• Rich in enzymes',
+    5: '• Alkalizes body\n• Natural detox\n• Reduces inflammation\n• Rich in fiber',
+    6: '• High in Vitamin C\n• Hydrates skin\n• Aids digestion\n• Natural cooling',
+    7: '• Excellent hydration\n• Natural diuretic\n• Cooling effect\n• Reduces inflammation',
+    8: '• Boosts metabolism\n• Anti-inflammatory\n• Aids digestion\n• Energy booster'
   };
 
   // Define back images for each product from assets/images
@@ -80,7 +80,7 @@ const Products = () => {
       'pure green',
       'vital glow',
       'water glow',
-       'zesty power' //'pure green'
+      'zesty power'
     ];
     return {
       ...product,
@@ -164,9 +164,9 @@ const Products = () => {
                   </div>
                 </div>
 
-                {/* Back Side - 2/3 image, 1/3 ingredients & benefits */}
+                {/* Back Side - 1.5/3 image, 1.5/3 ingredients & benefits */}
                 <div className="product-back">
-                  {/* Top 2/3 - Image */}
+                  {/* Top 1.5/3 - Image */}
                   <div className="back-image">
                     <img src={backImages[productId]} alt={`${product.name} ingredients`} className="back-img" />
                     <div className="image-overlay">
@@ -174,7 +174,7 @@ const Products = () => {
                     </div>
                   </div>
                   
-                  {/* Bottom 1/3 - Ingredients & Benefits */}
+                  {/* Bottom 1.5/3 - Ingredients & Benefits */}
                   <div className="back-ingredients">
                     <h3 className="ingredients-title">INGREDIENTS & BENEFITS</h3>
                     <div className="ingredients-container">
@@ -187,7 +187,11 @@ const Products = () => {
                       <div className="benefits-section">
                         <h4 className="section-title">Benefits:</h4>
                         <div className="benefits-text">
-                          {productBenefits[productId]}
+                          {productBenefits[productId].split('\n').map((line, index) => (
+                            <div key={index} className="benefit-line">
+                              {line}
+                            </div>
+                          ))}
                         </div>
                       </div>
                     </div>

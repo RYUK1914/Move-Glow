@@ -143,11 +143,12 @@
 }
 
 .product-img {
-  max-width: 85%;
-  max-height: 85%;
+  max-width: 100%;
+  max-height: 150%;
   object-fit: contain;
   transition: transform 0.5s ease;
   filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.3));
+   transform: scale(1.1);
 }
 
 .product:hover:not(.flipped) .product-img {
@@ -333,13 +334,13 @@
   flex-shrink: 0;
 }
 
-/* Back Side Styling - 2/3 image, 1/3 ingredients & benefits */
+/* Back Side Styling - UPDATED: 1.5/3 image, 1.5/3 ingredients & benefits */
 .product-back {
   transform: rotateY(180deg);
 }
 
 .back-image {
-  height: 66.67%; /* 2/3 of the back */
+  height: 50%; /* Changed from 66.67% to 50% (1.5/3) */
   position: relative;
   overflow: hidden;
   background: linear-gradient(135deg, #333 0%, #555 100%);
@@ -351,7 +352,7 @@
   object-fit: cover;
   object-position: center;
   opacity: 0.9;
-  filter: grayscale(100%);
+  /* Removed grayscale filter to show real colors */
 }
 
 .image-overlay {
@@ -373,7 +374,7 @@
 }
 
 .back-ingredients {
-  height: 33.33%; /* 1/3 of the back */
+  height: 50%; /* Changed from 33.33% to 50% (1.5/3) */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -409,7 +410,7 @@
 .ingredients-container {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.8rem; /* Increased from 0.5rem */
   width: 100%;
   height: 100%;
   overflow-y: auto;
@@ -451,7 +452,7 @@
 .ingredients-section, .benefits-section {
   background: rgba(255, 255, 255, 0.08);
   border-radius: 7px;
-  padding: 0.5rem;
+  padding: 0.8rem; /* Increased from 0.5rem */
   backdrop-filter: blur(8px);
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
@@ -460,7 +461,7 @@
   font-size: 1rem;
   color: white;
   text-align: left;
-  line-height: 1.3;
+  line-height: 1.4; /* Increased from 1.3 */
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.7px;
@@ -470,25 +471,22 @@
 }
 
 .benefits-text {
-  font-size: 0.85rem;
+  font-size: 0.9rem; /* Increased from 0.85rem */
   color: white;
   text-align: left;
-  line-height: 1.3;
+  line-height: 1.4; /* Increased from 1.3 */
   font-weight: 500;
   padding: 0.2rem;
   word-wrap: break-word;
   hyphens: auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
 }
 
-.benefits-text span {
-  background: rgba(255, 255, 255, 0.1);
-  padding: 0.2rem 0.5rem;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  white-space: nowrap;
+.benefit-line {
+  margin-bottom: 0.2rem;
+}
+
+.benefit-line:last-child {
+  margin-bottom: 0;
 }
 
 /* Responsive Design */
@@ -590,6 +588,15 @@
   .front-bottom {
     padding: 0.6rem 1.2rem 0.4rem;
   }
+  
+  .back-ingredients {
+    padding: 0.8rem;
+  }
+  
+  .ingredients-title {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+  }
 }
 
 @media (max-width: 768px) {
@@ -642,6 +649,10 @@
   
   .quantity-value-compact {
     font-size: 1.1rem;
+  }
+  
+  .ingredients-title {
+    font-size: 1.2rem;
   }
 }
 
