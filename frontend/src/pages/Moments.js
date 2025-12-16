@@ -11,7 +11,7 @@ const Moments = () => {
   const trainImages = Array.from({ length: 25 }, (_, i) => `img${i + 1}.jpg`);
 
   // Images for under the header: img50.jpg to img55.jpg
-  const headerImages = Array.from({ length: 10 }, (_, i) => `img${50 + i}.jpg`);
+  const headerImages = Array.from({ length: 20 }, (_, i) => `img${48 + i}.jpg`);
 
   // Double the train array for seamless animation
   const allTrainImages = [...trainImages, ...trainImages];
@@ -79,7 +79,7 @@ const Moments = () => {
                 <div key={index} className="header-image-item">
                   <img 
                     src={require(`../assets/train/${img}`)}
-                    alt={`Special Moment ${50 + index}`}
+                    alt={`Special Moment ${48 + index}`}
                   />
                 </div>
               ))}

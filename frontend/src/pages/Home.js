@@ -1,19 +1,18 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
-import bottles from '../assets/videos/bottles.mp4';
+import bottles from '../assets/videos/bottle.mp4';
 import post1 from '../assets/videos/post1.mp4';
 
-
 const Home = () => {
-  // Generate array for original images
-  const originalImages = [
-    'mov3.png', 'mov2.png', 'mov1.png', 'mov4.png', 'cat1.png', 'cat2.png',
-    'cat8.png', 'cat7.png', 'f1.png', 'b2.png', '1c.png', 'cat4.png',
-    'cat3.png', 'mov4.png', 'mov1.png', 'im5.png', 'im6.png', 'im7.png', 'im8.png'
+  // Generate array for train images - using your JPG images
+  const trainImages = [
+    '1.jpg', '2.jpg', '3.jpg', '4.jpg', '5.jpg', '8.jpg', 
+    '9.jpg', '10.jpg', '11.jpg', '12.jpg', '15.jpg', '16.jpg', 
+    '17.jpg', '18.jpg', '19.jpg', '1.jpg', '2.jpg', '3.jpg', '4.jpg'
   ];
 
   // Combine arrays for the train animation
-  const allTrainImages = [...originalImages];
+  const allTrainImages = [...trainImages];
 
   // Refs for video elements
   const heroVideoRef = useRef(null);
@@ -246,7 +245,7 @@ const Home = () => {
       <div className="image-train">
         <div className="image-train-inner">
           {allTrainImages.map((img, index) => (
-            <img key={index} src={`/assets/images/${img}`} alt={img} />
+            <img key={index} src={`/assets/images/${img}`} alt={`Product ${img}`} />
           ))}
         </div>
       </div>
@@ -255,7 +254,7 @@ const Home = () => {
       <div className="image-train image-train-second">
         <div className="image-train-inner">
           {allTrainImages.map((img, index) => (
-            <img key={`second-${index}`} src={`/assets/images/${img}`} alt={img} />
+            <img key={`second-${index}`} src={`/assets/images/${img}`} alt={`Product ${img}`} />
           ))}
         </div>
       </div>
