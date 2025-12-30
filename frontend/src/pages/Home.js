@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import './Home.css';
-import bottles from '../assets/videos/bottle.mp4';
-import post1 from '../assets/videos/post1.mp4';
+const bottles = '/assets/videos/bottle.mp4';
+const post1 = '/assets/videos/post1.mp4';
 
 const Home = () => {
   // Generate array for train images - using your JPG images
