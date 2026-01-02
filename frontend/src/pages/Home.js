@@ -172,7 +172,7 @@ const Home = () => {
           <p>Rich in vitamin C and other immune-boosting nutrients, our juices help keep you healthy and strong.</p>
         </div>
         <div className="balanced-media">
-          <img src="/assets/images/cat1.png" alt="Immune Boost" />
+          <img src="/assets/images/img21.jpg" alt="Immune Boost" />
         </div>
       </div>
 
